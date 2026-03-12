@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/scanFragment"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/nav_scan" />
+    <item
+        android:id="@+id/chartFragment"
+        android:icon="@android:drawable/stat_sys_data_bluetooth"
+        android:title="@string/nav_charts" />
+</menu>

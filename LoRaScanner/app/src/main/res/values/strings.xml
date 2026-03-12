@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoRa Scanner</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_charts">Charts</string>
+    <string name="nav_settings">Settings</string>
+</resources>

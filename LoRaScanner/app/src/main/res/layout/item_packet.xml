@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_card"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="4dp"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="10dp">
+
+    <!-- Signal quality color bar -->
+    <View
+        android:id="@+id/signal_bar"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@color/accent_cyan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00.000"
+        android:textColor="@color/text_secondary"
+        android:textSize="10sp"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/signal_bar"
+        android:layout_marginStart="10dp" />
+
+    <!-- Node ID -->
+    <TextView
+        android:id="@+id/tv_node_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="!a1b2c3d4"
+        android:textColor="@color/accent_cyan"
+        android:textSize="12sp"
+        android:fontFamily="monospace"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_time"
+        app:layout_constraintEnd_toStartOf="@id/tv_quality"
+        android:layout_marginStart="12dp" />
+
+    <!-- Quality label -->
+    <TextView
+        android:id="@+id/tv_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Good"
+        android:textSize="10sp"
+        android:textColor="@color/accent_green"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- RSSI -->
+    <TextView
+        android:id="@+id/tv_rssi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-85 dBm"
+        android:textColor="@color/text_primary"
+        android:textSize="13sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        app:layout_constraintStart_toEndOf="@id/signal_bar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp" />
+
+    <!-- SNR -->
+    <TextView
+        android:id="@+id/tv_snr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7.5 dB"
+        android:textColor="@color/accent_yellow"
+        android:textSize="13sp"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toBottomOf="@id/tv_node_id"
+        app:layout_constraintStart_toEndOf="@id/tv_rssi"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Frequency -->
+    <TextView
+        android:id="@+id/tv_freq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="868.1 MHz"
+        android:textColor="@color/accent_green"
+        android:textSize="13sp"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toBottomOf="@id/tv_node_id"
+        app:layout_constraintStart_toEndOf="@id/tv_snr"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Hops -->
+    <TextView
+        android:id="@+id/tv_hops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hops: 0"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toBottomOf="@id/tv_node_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <!-- Payload -->
+    <TextView
+        android:id="@+id/tv_payload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="A1 B2 C3 D4 E5 F6 07 08"
+        android:textColor="@color/text_dim"
+        android:textSize="10sp"
+        android:fontFamily="monospace"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_rssi"
+        app:layout_constraintStart_toEndOf="@id/signal_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

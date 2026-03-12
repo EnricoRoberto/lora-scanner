@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bg_surface"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select LoRa Device"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanning for Meshtastic BLE devices…"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_no_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No devices found yet.\nMake sure your Meshtastic device is powered on."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="300dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start_scan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Rescan"
+            android:textColor="@color/bg_primary"
+            app:backgroundTint="@color/accent_cyan"
+            app:cornerRadius="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sim_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Demo Mode"
+            android:textColor="@color/accent_yellow"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/accent_yellow"
+            app:cornerRadius="6dp" />
+    </LinearLayout>
+
+</LinearLayout>
