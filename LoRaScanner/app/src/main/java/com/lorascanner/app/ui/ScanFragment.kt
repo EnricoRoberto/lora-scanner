@@ -37,24 +37,10 @@ class ScanFragment : Fragment() {
         binding.recyclerPackets.adapter = adapter
 
         // Scan / Stop button
-        binding.btnScan.setOnClickListener {
-                when (viewModel.connectionState.value) {
-                ConnectionState.DISCONNECTED -> {
-                    if (viewModel.discoveredDevices.value.isEmpty()) {
-                        showDevicePickerOrSim()
-                    } else {
-                        showDevicePicker()
-                    }
-                }
-                ConnectionState.SCANNING -> viewModel.stopScan()
-                ConnectionState.RECEIVING -> {
-                    viewModel.disconnect()
-                    viewModel.stopSimulation()
-                }
-                else -> viewModel.stopScan()
-            }
-        }
-        }
+       binding.btnScan.setOnClickListener {
+        // La connessione si gestisce dalla tab Connetti
+            findNavController().navigate(R.id.connectFragment)
+        }    
 
         binding.btnSimulate.setOnClickListener {
             if (viewModel.connectionState.value == ConnectionState.RECEIVING) {
