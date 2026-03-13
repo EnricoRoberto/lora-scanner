@@ -38,9 +38,8 @@ class ScanFragment : Fragment() {
 
         // Scan / Stop button
         binding.btnScan.setOnClickListener {
-            when (viewModel.connectionState.value) {
+                when (viewModel.connectionState.value) {
                 ConnectionState.DISCONNECTED -> {
-                    // Show device picker or start simulation
                     if (viewModel.discoveredDevices.value.isEmpty()) {
                         showDevicePickerOrSim()
                     } else {
@@ -54,6 +53,7 @@ class ScanFragment : Fragment() {
                 }
                 else -> viewModel.stopScan()
             }
+        }
         }
 
         binding.btnSimulate.setOnClickListener {
