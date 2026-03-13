@@ -1,6 +1,6 @@
 package com.lorascanner.app.ui
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
