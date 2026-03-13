@@ -1,6 +1,5 @@
 package com.lorascanner.app.ui
 
-import androidx.navigation.fragment.findNavController
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lorascanner.app.R
 import com.lorascanner.app.ble.ConnectionState
 import com.lorascanner.app.databinding.FragmentScanBinding
 import com.lorascanner.app.ui.adapter.PacketAdapter
