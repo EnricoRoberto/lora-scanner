@@ -38,11 +38,9 @@ class ScanFragment : Fragment() {
         }
         binding.recyclerPackets.adapter = adapter
 
-        // Scan / Stop button
-       binding.btnScan.setOnClickListener {
-        // La connessione si gestisce dalla tab Connetti
+        binding.btnScan.setOnClickListener {
             findNavController().navigate(R.id.connectFragment)
-        }    
+        }
 
         binding.btnSimulate.setOnClickListener {
             if (viewModel.connectionState.value == ConnectionState.RECEIVING) {
@@ -56,11 +54,8 @@ class ScanFragment : Fragment() {
             ExportUtils.exportCsv(requireContext(), viewModel.packets.value)
         }
 
-        // Observe state
         lifecycleScope.launch {
-            viewModel.connectionState.collect { state ->
-                updateConnectionUI(state)
-            }
+            viewModel.connectionState.collect { state -> updateConnectionUI(state) }
         }
         lifecycleScope.launch {
             viewModel.packets.collect { packets ->
@@ -79,34 +74,10 @@ class ScanFragment : Fragment() {
     }
 
     private fun updateConnectionUI(state: ConnectionState) {
-        val isReceiving = state == ConnectionState.RECEIVING
-        binding.statusIndicator.isActivated = isReceiving
+        binding.statusIndicator.isActivated = state.isActive
         binding.tvStatus.text = state.label
-        binding.btnScan.text = when (state) {
-            ConnectionState.RECEIVING -> "Disconnect"
-            ConnectionState.SCANNING  -> "Stop Scan"
-            else -> "Scan Devices"
-        }
-        binding.btnSimulate.text = if (isReceiving && viewModel.isScanning.value.not())
-            "Stop Sim" else "▶ Demo Mode"
-    }
-
-    private fun showDevicePickerOrSim() {
-        viewModel.startScan()
-        // After a delay, if nothing found offer simulation
-        lifecycleScope.launch {
-            kotlinx.coroutines.delay(3000)
-            if (viewModel.discoveredDevices.value.isEmpty()) {
-                // Show a dialog or auto-start simulation
-            }
-        }
-    }
-
-    private fun showDevicePicker() {
-        val dialog = DevicePickerDialog { device ->
-            viewModel.connect(device)
-        }
-        dialog.show(childFragmentManager, "device_picker")
+        binding.btnScan.text = "← Connetti"
+        binding.btnSimulate.text = if (state == ConnectionState.RECEIVING) "Stop Sim" else "▶ Demo"
     }
 
     override fun onDestroyView() {

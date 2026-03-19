@@ -20,7 +20,6 @@ class ConnectFragment : Fragment() {
     private var _binding: FragmentConnectBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ScannerViewModel by activityViewModels()
-    private lateinit var deviceAdapter: DeviceAdapter
     private var startupDialogShown = false
 
     override fun onCreateView(
@@ -33,38 +32,26 @@ class ConnectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        deviceAdapter = DeviceAdapter { device ->
-            viewModel.connect(device)
-        }
+        val deviceAdapter = DeviceAdapter { device -> viewModel.connect(device) }
         binding.recyclerDevices.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerDevices.adapter = deviceAdapter
 
-        // Pulsante cerca BLE
-        binding.btnScanBle.setOnClickListener {
-            viewModel.startScan()
-        }
+        binding.btnScanBle.setOnClickListener { viewModel.startScan() }
 
-        // Pulsante Demo
         binding.btnDemo.setOnClickListener {
             viewModel.startSimulation()
-            // Vai automaticamente alla schermata Scan
             findNavController().navigate(R.id.scanFragment)
         }
 
-        // Pulsante Disconnetti
         binding.btnDisconnect.setOnClickListener {
             viewModel.disconnect()
             viewModel.stopSimulation()
         }
 
-        // Osserva stato connessione
         lifecycleScope.launch {
-            viewModel.connectionState.collect { state ->
-                updateUI(state)
-            }
+            viewModel.connectionState.collect { state -> updateUI(state) }
         }
 
-        // Osserva dispositivi trovati
         lifecycleScope.launch {
             viewModel.discoveredDevices.collect { devices ->
                 deviceAdapter.submitList(devices)
@@ -73,7 +60,6 @@ class ConnectFragment : Fragment() {
             }
         }
 
-        // Popup automatico all'avvio (solo la prima volta)
         if (!startupDialogShown) {
             startupDialogShown = true
             showStartupDialog()
@@ -90,19 +76,14 @@ class ConnectFragment : Fragment() {
                 "• Heltec WiFi LoRa 32 V3\n\n" +
                 "Se non hai ancora l'hardware usa la Demo Mode."
             )
-            .setPositiveButton("🔍 Cerca dispositivi") { _, _ ->
-                viewModel.startScan()
-            }
+            .setPositiveButton("🔍 Cerca dispositivi") { _, _ -> viewModel.startScan() }
             .setNegativeButton("▶ Demo Mode") { _, _ ->
                 viewModel.startSimulation()
                 findNavController().navigate(R.id.scanFragment)
             }
             .setCancelable(true)
             .create()
-
         dialog.show()
-
-        // Stile dialog
         dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
             ?.setTextColor(android.graphics.Color.parseColor("#00E5FF"))
         dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)
@@ -113,7 +94,6 @@ class ConnectFragment : Fragment() {
     private fun updateUI(state: ConnectionState) {
         binding.statusDot.isActivated = state.isActive
         binding.tvStatus.text = state.label
-
         when (state) {
             ConnectionState.RECEIVING -> {
                 binding.tvDeviceName.text = "Ricezione pacchetti LoRa attiva"
