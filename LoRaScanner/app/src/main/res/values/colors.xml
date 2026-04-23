@@ -27,3 +27,8 @@
     <color name="nav_unselected">#6A9CC0</color>
     <color name="ic_launcher_background">#0A2A4A</color>
 </resources>
+<color name="blue_1">#0000FF</color>
+<color name="blue_2">#0000EE</color>
+<color name="blue_3">#0000DD</color>
+<color name="blue_4">#0000CC</color>
+<color name="blue_5">#0000BB</color>
